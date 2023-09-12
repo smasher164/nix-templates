@@ -6,22 +6,12 @@
   };
 
   outputs = { self, nixpkgs, flake-utils }:
-    let supportedSystems = [
-      "aarch64-linux"
-      "i686-linux"
-      "x86_64-linux"
-    ]; in
-    flake-utils.lib.eachSystem supportedSystems (system:
+    let supportedSystems = [ "aarch64-linux" "i686-linux" "x86_64-linux" ];
+    in flake-utils.lib.eachSystem supportedSystems (system:
       let
         pkgs = import nixpkgs {
           inherit system;
-          overlays = [];
+          overlays = [ ];
         };
-      in
-      {
-        devShell = pkgs.mkShell {
-          buildInputs = [
-          ];
-        };
-      });
+      in { devShell = pkgs.mkShell { buildInputs = [ ]; }; });
 }

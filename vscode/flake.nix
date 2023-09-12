@@ -6,12 +6,8 @@
   };
 
   outputs = { self, nixpkgs, flake-utils }:
-    let supportedSystems = [
-      "aarch64-linux"
-      "i686-linux"
-      "x86_64-linux"
-    ]; in
-    flake-utils.lib.eachSystem supportedSystems (system:
+    let supportedSystems = [ "aarch64-linux" "i686-linux" "x86_64-linux" ];
+    in flake-utils.lib.eachSystem supportedSystems (system:
       let
         vscode-overlay = final: prev: {
           vscodium = prev.vscodium.overrideAttrs (old: {
@@ -28,15 +24,9 @@
         };
         vscode-with-extensions = pkgs.vscode-with-extensions.override {
           vscode = pkgs.vscodium;
-          vscodeExtensions = [
-          ];
+          vscodeExtensions = [ ];
         };
-      in
-      {
-        devShell = pkgs.mkShell {
-          buildInputs = [
-            vscode-with-extensions
-          ];
-        };
+      in {
+        devShell = pkgs.mkShell { buildInputs = [ vscode-with-extensions ]; };
       });
 }
