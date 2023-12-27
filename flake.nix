@@ -14,6 +14,10 @@
         path = ./ocaml5;
         description = "A flake that sets up the devShell with ocaml 5";
       };
+      rust-nightly = {
+        path = ./rust-nightly;
+        description = "A flake that sets up the devShell with rust nightly";
+      };
     };
   };
 }
